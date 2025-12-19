@@ -1,34 +1,32 @@
 // index.js
 
-// Countdown Timer: logs remaining time at intervals and stops at 0
 function countdownTimer(seconds) {
   let remaining = seconds;
-
-  const intervalId = setInterval(() => {
-    console.log(remaining);
-    remaining--;
-
-    if (remaining === 0) {
-      clearInterval(intervalId);
+  const intervalId = globalThis.setInterval(() => {
+    if (remaining > 0) {
+      console.log(remaining);
+      remaining -= 1;
+      if (remaining === 0) {
+        globalThis.clearInterval(intervalId);
+      }
     }
   }, 1000);
 }
 
-// Delayed Reminder: logs a reminder message after a specified delay
 function delayedReminder(message, delay) {
-  setTimeout(() => {
+  globalThis.setTimeout(() => {
     console.log(message);
   }, delay);
 }
 
-// Recurring Timer: logs the message repeatedly at fixed intervals until stopped
 function recurringTimer(message, interval) {
-  const intervalId = setInterval(() => {
+  const intervalId = globalThis.setInterval(() => {
     console.log(message);
   }, interval);
 
-  // Return a function to stop the recurring timer
-  return () => clearInterval(intervalId);
+  return function stopRecurringTimer() {
+    globalThis.clearInterval(intervalId);
+  };
 }
 
 module.exports = {
