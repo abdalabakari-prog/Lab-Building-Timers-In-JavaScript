@@ -5,10 +5,10 @@ function countdownTimer(seconds) {
   let remaining = seconds;
 
   const intervalId = setInterval(() => {
-    console.log(remaining);
-    remaining--;
-
-    if (remaining < 0) {
+    if (remaining > 0) {
+      console.log(remaining);
+      remaining--;
+    } else {
       clearInterval(intervalId);
     }
   }, 1000);
@@ -21,17 +21,16 @@ function delayedReminder(message, delay) {
   }, delay);
 }
 
-// Recurring Timer: performs an action repeatedly at fixed intervals until stopped
-function recurringTimer(action, interval) {
+// Recurring Timer: logs the message repeatedly at fixed intervals until stopped
+function recurringTimer(message, interval) {
   const intervalId = setInterval(() => {
-    action();
+    console.log(message);
   }, interval);
 
   // Return a function to stop the recurring timer
   return () => clearInterval(intervalId);
 }
 
-// Export functions for Jest tests
 module.exports = {
   countdownTimer,
   delayedReminder,
